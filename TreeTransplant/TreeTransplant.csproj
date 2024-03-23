@@ -9,7 +9,6 @@
         <Nullable>enable</Nullable>
         <Platforms>AnyCPU</Platforms>
         <TranslationClassBuilder_AddGetByKey>true</TranslationClassBuilder_AddGetByKey>
-        <GamePath>D:\steam\steamapps\common\Stardew Valley</GamePath>
         <PackageLicenseExpression>GPL-3.0</PackageLicenseExpression>
     </PropertyGroup>
     <ItemGroup>
