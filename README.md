@@ -2,9 +2,20 @@
 **TreeTransplant** is a [Stardew Valley](http://stardewvalley.net/) mod that lets you transplant trees (including fruit trees)
 on your farm without needing to chop them down and wait for them to regrow.
 
+
+## Modifications
+
+- 1.6 compatibility
+- Update to Smapi 4.0.0
+
+
+[Original Repository](https://github.com/LeonBlade/TreeTransplant)
+
+
+
 ## Install
 1. [Install the latest version of SMAPI](http://canimod.com/for-players/install-smapi).
-2. [Download the newest version](https://github.com/LeonBlade/TreeTransplant/releases) and install into the mods directory.
+2. [Download the newest version](https://github.com/siweipancc/TreeTransplant/releases) and install into the mods directory.
 3. Run the game using SMAPI.
 
 ## Use
@@ -36,7 +47,7 @@ you can close out of this menu and return back in front of Robin.
 
 ## Versions
 
-See [releases page](https://github.com/LeonBlade/TreeTransplant/releases).
+See [releases page](https://github.com/siweipancc/TreeTransplant/releases).
 
 ## License
 
@@ -44,6 +55,4 @@ GPL-3.0
 
 ## See also
 
-* [Nexus mods](http://www.nexusmods.com/stardewvalley/mods/1342/)
-* [Discussion thread](http://community.playstarbound.com/threads/treetransplant.135549)
-* [Chucklefish Mod](https://community.playstarbound.com/resources/tree-transplant.5485/)
+* [Nexus mods](http://www.nexusmods.com/stardewvalley/mods/20852/)
