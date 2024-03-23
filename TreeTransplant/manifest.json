@@ -1,7 +1,7 @@
 {
   "Name": "Tree Transplant(Fix)",
   "Author": "LeonBlade/Siweipancc",
-  "Version": "2.0.13",
+  "Version": "2.0.0",
   "Description": "(Fix Version)Allows you to transplant trees in game.",
   "UniqueID": "Siweipancc.TreeTransplant",
   "EntryDll": "TreeTransplant.dll",
