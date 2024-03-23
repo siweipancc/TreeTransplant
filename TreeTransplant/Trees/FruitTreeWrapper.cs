@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using StardewValley;
 using StardewValley.TerrainFeatures;
+using Vector2 = System.Numerics.Vector2;
 
 namespace TreeTransplant
 {
@@ -21,7 +22,7 @@ namespace TreeTransplant
 
 		public Texture2D texture
 		{
-			get { return FruitTree.texture; }
+			get { return tree.texture; }
 		}
 
 		public bool flipped
@@ -30,9 +31,14 @@ namespace TreeTransplant
 			set { tree.flipped.Set(value); }
 		}
 
-		public int treeType
+		public Rectangle getBoundingBox(Vector2 tileLocation)
 		{
-			get { return tree.treeType.Value; }
+			return tree.getBoundingBox();
+		}
+
+		public string treeType
+		{
+			get { return tree.treeId.Value; }
 		}
 
 		public Rectangle treeTopSourceRect
@@ -44,7 +50,7 @@ namespace TreeTransplant
 
 				return new Rectangle(
 					tree.growthStage.Value * 48 + (adult ? season * 48 : 4), // offset the small trees because idk
-					tree.treeType.Value * 80,
+					int.Parse(tree.treeId.Value) * 80,
 					48,
 					80
 				);
@@ -53,13 +59,10 @@ namespace TreeTransplant
 
 		public Rectangle stumpSourceRect
 		{
-			get { return new Rectangle(384, (tree.treeType.Value * 80) + 56, 48, 24); }
+			get { return new Rectangle(384, (int.Parse(tree.treeId.Value)  * 80) + 56, 48, 24); }
 		}
 
-		public Rectangle getBoundingBox(Vector2 tileLocation)
-		{
-			return tree.getBoundingBox(tileLocation);
-		}
+
 
 		public bool stump
 		{

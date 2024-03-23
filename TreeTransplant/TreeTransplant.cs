@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using StardewModdingAPI;
@@ -38,7 +36,7 @@ namespace TreeTransplant
 		/// </summary>
 		/// <param name="sender">The event sender.</param>
 		/// <param name="e">The event data.</param>
-		private void OnGameLaunched(object sender, GameLaunchedEventArgs e)
+		private void OnGameLaunched(object? sender, GameLaunchedEventArgs e)
 		{
 			// batch together the trees in a render texture for our menu
 			loadTreeTexture();
@@ -53,7 +51,7 @@ namespace TreeTransplant
 		/// </summary>
 		/// <param name="sender">The event sender.</param>
 		/// <param name="e">The event data.</param>
-		private void OnMenuChanged(object sender, MenuChangedEventArgs e)
+		private void OnMenuChanged(object? sender, MenuChangedEventArgs e)
 		{
 			// carpenter dialog in science house?
 			if (Game1.currentLocation?.Name == "ScienceHouse" && e.NewMenu is DialogueBox && Game1.currentLocation.lastQuestionKey == "carpenter" && Game1.IsMasterGame)
@@ -72,7 +70,7 @@ namespace TreeTransplant
 				return;
 
 			// don't care if we're upgrading
-			if (Game1.player.currentUpgrade != null)
+			if (Game1.getFarm().buildings.Any(x => x.isUnderConstruction()))
 				return;
 
 			// create answer choices
@@ -126,7 +124,7 @@ namespace TreeTransplant
 			{
 				case "Shop":
 					Game1.player.forceCanMove();
-					Game1.activeClickableMenu = new ShopMenu(Utility.getCarpenterStock(), 0, "Robin");
+					Utility.TryOpenShopMenu(Game1.shop_carpenter, Game1.builder_robin);
 					break;
 				case "Upgrade":
 					Helper.Reflection.GetMethod(Game1.currentLocation, "houseUpgradeOffer").Invoke();
@@ -135,7 +133,7 @@ namespace TreeTransplant
 					Helper.Reflection.GetMethod(Game1.currentLocation, "communityUpgradeOffer").Invoke();
 					break;
 				case "Construct":
-					Game1.activeClickableMenu = new CarpenterMenu(false);
+					Game1.activeClickableMenu = new CarpenterMenu(Game1.builder_robin,null);
 					break;
 				case "Renovate":
 					Game1.player.forceCanMove();
@@ -144,6 +142,7 @@ namespace TreeTransplant
 				case "Tree":
 					Game1.activeClickableMenu = new TreeTransplantMenu();
 					break;
+				// ReSharper disable once RedundantCaseLabel
 				case "Leave":
 				default:
 					break;
@@ -170,7 +169,7 @@ namespace TreeTransplant
 			Game1.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, null);
 
 			// Get source rectangle for tree tops.
-			var treeTopSourceRect = new Tree().treeTopSourceRect;
+			var treeTopSourceRect =Tree.treeTopSourceRect;
 
 			for (var s = 0; s < seasons.Length; s++)
 			{
@@ -238,7 +237,7 @@ namespace TreeTransplant
 			var palmTreeTexture = Game1.content.Load<Texture2D>("TerrainFeatures\\tree_palm");
 
 			// Get source rectangle for tree tops.
-			var treeTopSourceRect = new Tree().treeTopSourceRect;
+			var treeTopSourceRect = Tree.treeTopSourceRect;
 
 			// draw the trunk of the tree
 			Game1.spriteBatch.Draw(
@@ -286,7 +285,8 @@ namespace TreeTransplant
 		/// </summary>
 		private void loadFlipTexture()
 		{
-			flipTexture = helper.Content.Load<Texture2D>(Path.Combine("assets", "flip.png"), ContentSource.ModFolder);
+			IModContentHelper modContentHelper = Helper.ModContent;
+			flipTexture = modContentHelper.Load<Texture2D>("/assets/flip.png");
 		}
 	}
 }

@@ -4,13 +4,14 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using StardewValley;
 using StardewValley.TerrainFeatures;
+using Vector2 = System.Numerics.Vector2;
 
 namespace TreeTransplant
 {
 	public class TreeWrapper : ITree
 	{
 		private readonly Tree tree;
-		private readonly int[] basicTrees = new[] { Tree.bushyTree, Tree.leafyTree, Tree.pineTree, Tree.mahoganyTree };
+		private readonly string[] basicTrees = new[] { Tree.bushyTree, Tree.leafyTree, Tree.pineTree, Tree.mahoganyTree };
 
 		public TreeWrapper(Tree t)
 		{
@@ -40,7 +41,8 @@ namespace TreeTransplant
 			set => tree.flipped.Set(value);
 		}
 
-		public int treeType => tree.treeType.Value;
+
+		public string treeType => tree.treeType.Value;
 
 		public Rectangle treeTopSourceRect
 		{
@@ -72,7 +74,7 @@ namespace TreeTransplant
 				}
 
 				// tree index refers to column in the generated texture, mahogany is hard coded as 4
-				var treeIndex = tree.treeType.Value == Tree.mahoganyTree ? 4 : tree.treeType.Value;
+				var treeIndex = (parse(tree.treeType.Value) == parse(Tree.mahoganyTree) ? 4 : parse(tree.treeType.Value));
 				var basicTree = treeIndex >= 1 && treeIndex <= 4;
 				// non-basic trees are palm and mushroom which are 6 and 7 so we subtract 6 to get 0 and 1
 				var xOffset = treeIndex - (basicTree ? 1 : 6);
@@ -82,8 +84,13 @@ namespace TreeTransplant
 			}
 		}
 
+		int parse(string va)
+		{
+			return int.Parse(va);
+		}
+
 		public Rectangle stumpSourceRect => Tree.stumpSourceRect;
-		public Rectangle getBoundingBox(Vector2 tileLocation) => tree.getBoundingBox(tileLocation);
+		public Rectangle getBoundingBox(Vector2 tileLocation) => tree.getBoundingBox();
 		public bool stump => tree.stump.Value;
 		public bool isAdult() => tree.growthStage.Value > 4;
 		public bool isStumpSeparate() => isAdult();

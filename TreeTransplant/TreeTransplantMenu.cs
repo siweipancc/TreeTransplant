@@ -1,11 +1,13 @@
-﻿using System;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using StardewValley;
 using StardewValley.BellsAndWhistles;
 using StardewValley.Menus;
 using StardewValley.TerrainFeatures;
+using Color = Microsoft.Xna.Framework.Color;
+using Rectangle = Microsoft.Xna.Framework.Rectangle;
+using Vector2 = Microsoft.Xna.Framework.Vector2;
 
 namespace TreeTransplant
 {
@@ -249,7 +251,7 @@ namespace TreeTransplant
 
 			// get properties of tiles
 			bool isWater = farm.isOpenWater(tileX, tileY);
-			bool isOccupied = farm.isTileOccupiedForPlacement(tileLocation);
+			bool isOccupied = farm.IsTileOccupiedBy(tileLocation);
 			bool isPassable = farm.isTilePassable(new xTile.Dimensions.Location(tileX, tileY), Game1.viewport);
 			bool isPlaceable = farm.isTilePlaceable(tileLocation);
 			bool noSpawnAll = farm.doesTileHaveProperty(tileX, tileY, "NoSpawn", "Back") == "All";
@@ -424,7 +426,7 @@ namespace TreeTransplant
 							Color.White,
 							0.0f,
 							Vector2.Zero,
-							Game1.pixelZoom,
+							(float)Game1.pixelZoom,
 							SpriteEffects.None,
 							0.999f
 						);

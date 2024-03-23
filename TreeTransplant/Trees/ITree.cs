@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using StardewValley.TerrainFeatures;
+using Vector2 = System.Numerics.Vector2;
 
 namespace TreeTransplant
 {
@@ -12,7 +13,7 @@ namespace TreeTransplant
 		Rectangle treeTopSourceRect { get; }
 		Rectangle stumpSourceRect { get; }
 		Rectangle getBoundingBox(Vector2 tileLocation);
-		int treeType { get; }
+		string treeType { get; }
 		bool isAdult();
 		bool stump { get; }
 		bool isStumpSeparate();
