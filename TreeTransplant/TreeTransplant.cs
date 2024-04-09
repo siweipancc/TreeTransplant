@@ -133,7 +133,7 @@ namespace TreeTransplant
 					Helper.Reflection.GetMethod(Game1.currentLocation, "communityUpgradeOffer").Invoke();
 					break;
 				case "Construct":
-					Game1.activeClickableMenu = new CarpenterMenu(Game1.builder_robin,null);
+					Game1.currentLocation.ShowConstructOptions("Robin");
 					break;
 				case "Renovate":
 					Game1.player.forceCanMove();
